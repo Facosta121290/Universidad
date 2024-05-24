@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from .forms import CustomAuthenticationForm
 from .models import Curso
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
@@ -49,3 +51,7 @@ def eliminarCurso(request, codigo):
     messages.success(request, '¡Curso eliminado!')
 
     return redirect('/')
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
+    template_name = "templates/login.html"
